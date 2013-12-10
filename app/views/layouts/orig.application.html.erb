@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CloudRegistry</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "html5", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <style>#globalWrapper {width:100%}#top-header {height:40px;padding:12px 0;text-align:center;font-size:13px; background-color:black;color:#eee}</style>
+</head>
+<body>
+  <aside id="top-header">
+links go here.
+  </aside>
+  <section id="globalWrapper">
+    <article id="main">
+
+<%= yield %>
+
+    </article>
+  </section>
+  <footer id="footer">
+
+  </footer>
+</body>
+</html>

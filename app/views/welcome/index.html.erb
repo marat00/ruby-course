@@ -1,0 +1,59 @@
+<div class="row">
+  <br>
+</div>
+<div style="background-color:transparent">
+  <div class="row">
+    <div class="twelve columns left" style="padding-top:2em;padding-bottom:2em">
+      <h1 id='site-title'>Ruby Programming <small>Heroku Registry</small></h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="four columns">
+    <div class="panel radius" style="background-color:#ff8">
+      <h4>Link to Your App</h4>
+      <p>Use this form to enter the URL for your Ruby Programming Heroku Rails Application. This form is
+      collecting URLs from both of my Ruby courses at <a href="http://hackingthevalley.com/ccsf/ruby">City College of San Francisco</a>. <%# <%#and <a href="http://hackingthevalley.com/csm/ruby">College of San Mateo%>.</a> %></p>
+        <p>Enter your USERID and your HEROKU app.</p>
+      <p>Read the <a href="/welcome/assignment">assignment</a>.</p>
+      </div>
+    </div>
+    <div class="eight columns" style="background-color:#f0f0f0;">
+      <h3>Register your Heroku URL</h3>
+      <%= form_for @student, :url => {:action => 'create'} do |f| %>
+      <p>
+        <%= f.label :COURSE %>
+      </p>
+      <p>
+        <%= f.select :course, options_for_select(['Choose your course',['CS 132A','cs132a'],['CIS 113','cis113']]) %>
+      </p>
+      <p>
+        <%= f.label :USERID %>
+      </p>
+      <p>
+        <%= f.text_field :name, :placeholder =>'Your USERID' %>
+      </p>
+      <p>
+        <%= f.label :URL %>
+      </p>
+      <p>
+        <input type="url" name="url" placeholder="Heroku URL"/>
+      </p>
+      <input type="submit" class="round button" value="Register" />
+      <% end %>
+    </div>
+  </div>
+<div style="margin:1em 0; height:40px;clear:both;"><br></div>
+<div class="row">
+  <div class="twelve columns panel callout">
+    <h2>Your output will go here...</h2>
+    <h5>
+        <p>
+      When you are finished this assignment, your app will display links to class Heroku web sites here. 
+      Go to the <a href="http://polar-journey-7101.herokuapp.com">example</a> to see how your
+      page should behave. 
+      </p>
+      <p>Register your own site into your Registry.</p>
+    </h5>
+  </div>
+</div>

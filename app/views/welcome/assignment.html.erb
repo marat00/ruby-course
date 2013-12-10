@@ -1,0 +1,169 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>
+Ruby Programming: Week 16 Lab 8 -- Rails ActiveRecord Associations and Routes
+</title>
+<link rel="stylesheet" type="text/css" href="foundation.min.css"> <link rel="stylesheet" type="text/css" href="lyx.css"> <link rel="stylesheet" type="text/css" href="counter.css">
+<style>
+
+/* Itemizes H2, h3, and H4 elements */
+div#globalWrapper {
+  counter-reset: header1_counter 0;
+  counter-reset: header2_counter 0;
+  counter-reset: header3_counter 0;
+  counter-reset: header4_counter 0;
+}
+
+div#globalWrapper h2 {
+  counter-increment: header2_counter;
+  counter-reset: header3_counter 0;
+}
+
+div#globalWrapper h3 {
+  counter-increment: header3_counter;
+  counter-reset: header4_counter 0;
+}
+
+div#globalWrapper h4 {
+  counter-increment: header4_counter;
+}
+
+div#globalWrapper  h2:before {
+  counter-reset: header3_counter 0;
+  content: counter(header2_counter, decimal) ' ';
+}
+
+div#globalWrapper  h3:before {
+    content: counter(header2_counter, decimal) '.' counter(header3_counter, decimal) ' ';
+    counter-reset: header4_counter 0;
+    font-size: 80%;
+}
+
+div#globalWrapper  h4:before {
+    content: counter(header2_counter, decimal) '.' counter(header3_counter, decimal) '.' counter(header4_counter, decimal) ' ';
+    font-size: 80%;
+}
+#globalWrapper ol,#globalWrapper  ul {
+  list-style-position:inside;
+}
+
+h1 ,h2,h3,h4,h5,code, h1 a,h2 a,h3 a,h4 a,h5 a {font-weight: 400;margin:1em 0}
+body,p,div,th,td,li,dd,dt,input, blockquote,textarea,pre,tt,strike,del {color:black;font-size:16px;line-height:1.5}
+
+pre {white-space:pre-wrap;word-wrap:break-word; margin:1em 0}
+</style>
+</head>
+<blockquote>
+
+
+</blockquote>
+<div class="row">
+<div class="twelve columns">
+<section id="globalWrapper">
+<h1 id="active-record-associations-has_many-and-belongs_to">Active Record Associations <code>has_many</code> and <code>belongs_to</code></h1>
+<blockquote>
+<h2>Overview</h2>
+<h5>This is the final assignment for the semester. It's been a long haul, and I'm impressed that so many of you guys have hung in for the duration. I applaud all of you for hanging in. <strong>Kudos, to all!</strong></h5>
+<hr>
+
+<p>In Week 16 you will work with an existing Rails application and modify it to display the collected links to the Heroku Rails apps created by my CSM and CCSF Spring semester Ruby students.</p>
+<h3>Reading and Online Resources</h3>
+<ul>
+<li><em>Beginning Ruby: Chapter 13 – Ruby on Rails: Ruby's Killer App#Models and Relationships</em>[p. 277]</li>
+<li>Active Record associations: <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a></li>
+<li>Active Record Query Interface: <a href="http://guides.rubyonrails.org/active_record_querying.html">http://guides.rubyonrails.org/active_record_querying.html</a></li>
+
+<h3>Example Rails applications</li>
+<li><a href="http://polar-journey-7101.herokuapp.com">http://polar-journey-7101.herokuapp.com</a> (Rails 2.2.2)</li>
+<li><a href="http://hackingthevalley.com">http://hackingthevalley.com</a></li>
+</ul>
+</blockquote>
+</section>
+<div id="globalWrapper">
+<h2 id="installing-the-ruby-course-rails-app">Installing the ruby-course Rails App</h2>
+<p>This is the final lab assignment for this course.</p>
+<p>In this lab you will modify an existing application named <code>ruby-course</code> to add a feature the the form page. This Rails app is available from my Github account: <a href="https://github.com/douglasputnam/cs132alab8.git">https://github.com/douglasputnam/cs132alab8.git</a></p>
+<h3 id="follow-these-steps">FOLLOW THESE STEPS</h3>
+<ol style="list-style-type: decimal">
+<li><p>Do a <code>git add .; git commit</code> of your current Heroku app. We will not use the app we created in labs 7a and 7b is app for this assignment.</p></li>
+<li><p>Do a <code>git clone</code> of ruby-course:</p>
+<pre class="LyX-Code"><code>git clone https://github.com/douglasputnam/cs132alab8.git</code></pre></li>
+<li><p>Log in to your Heroku account and remove your Heroku app — yes, the one you worked so hard on. After the course you can restore your work from the git archive you have already created.</p></li>
+<li><p>Recreate your Heroku app. You can use the same name (recommended) or you can create an entirely new app with a different name.</p></li>
+<li><p>On your computer, go to the <code>ruby-course</code> folder (the one you cloned from Github). Set up git and heroku again to work with this new code.</p></li>
+<li><p>In the <code>ruby-course</code> folder do:</p>
+<pre class="LyX-Code"><code>bundle install</code></pre></li>
+<li><p>Then do:</p>
+<pre class="LyX-Code"><code>git add .
+git commit -m &#39;initial commit&#39;</code></pre></li>
+<li><p>Do a: <code>git push heroku master</code></p></li>
+<li><p>On the command, create the database tables on Heroku: <code>heroku run rake db:migrate</code></p></li>
+<li><p>Then go the your Heroku app's URL to see if your site is working. If it is, hooray! If it's not, check that you went through the previous steps correctly. If you are still having problems, post your questions on the forum.</p></li>
+</ol>
+<h3 id="alternate-plan">Alternate Plan</h3>
+<p>Though it's easier to use the <code>ruby-course</code> app as it stands, you may want to integrate it into your current Heroku app. This will likely be extra work, but you can do it by creating the necessarey Classes and Models.</p>
+<h2 id="lab-8-todo">Lab 8 TODO</h2>
+
+<p>The home page (<code>welcome#index</code>) currently displays only the registration form. Your job is to:</p>
+<ol style="list-style-type: decimal">
+    <li>Write code that displays all of the collected links on the <code>welcome#index</code> page.</li>
+    <li>Write code that displays all of the collected urls on the <code>urls#index</code> page.</li>
+<li>Creates HREF links to the URL.</li>
+<li>Give your script the same functionality as <a href="http://polar-journey-7101.herokuapp.com">this example</a>.</li>
+</ol>
+
+<h3 id="edit-these-files-at-least">Edit these files (at least):</h3>
+<ol style="list-style-type: decimal">
+<li><code>app/controllers/welcome_controller.rb</code>: Write code that will read the database for the links to all registered student Heroku sites.</li>
+<li><code>app/views/welcome/index.html.erb</code>: Write code that displays the data prepared by the <code>welcome_controller.rb</code>.</li>
+<li><code>app/models/student.rb</code>: A Student can have many URLs; validates that the student's name is in the list of registered students.</li>
+<li><code>app/models/url.rb</code>: URLs belong to a student; validates that the URL is a <strong>herokuapp.com</strong> URL.</li>
+<li><code>app/views/urls/index.html.erb</code>: Display a confirmation message when a new URL has been registered; display the collected URLs </strong> URL.</li>
+</ol>
+<h3 id="running-migrations">Running Migrations</h3>
+<p>After git-cloning the ruby-course app, you will have to run <em>rake db:migrate</em> to create the database tables for Students and Urls.</p>
+<pre class="LyX-Code"><code>rake db:migrate</code></pre>
+<h3 id="routes">Routes</h3>
+<p>Routes are one of the most confusing aspects of Rails. Look at the <code>config/routes.rb</code> file to see how the routes work in this application. To see all of the routes in the application, you can run:</p>
+<pre class="LyX-Code"><code>rake routes</code></pre>
+<h3 id="validation">Validation</h3>
+<p>Modify the Student and Url model to validate Students and Urls. Students can <code>:have_many</code> Urls; Urls <code>:belongs_to</code> a Student.</p>
+
+<h4>Students</h4>
+<p>For this assignment, the only allowed user names are in the list below.</p>
+<ol style="list-style-type: decimal">
+<li><p>Modify the default <code>student.rb</code> file to allow only students from this list to add URLs to the list.</p>
+<pre><code>dputnam,adesilv1,ryaryy,rgorreap,ubenesch,zng1,jswanner,npachec2,avalenc7,bmckeand,mpernabe,dott,bernst,tcoffey1,gpaz,ywun,mweaver3,jsteele,pkassian,psakhark,jsotobus,bkrantzi,crosales,jmencha1,asushon,kchan131,mhankins,jmonto10,jreed13,ikim5,jpayne,ktieu,kposey1,dlouie11,zbazarra,tho36,tparas,amanayan,jgarc166</code></pre></li>
+</ol>
+
+
+<h4>Urls</h4>
+<ol><li><p>Modify the default <code>url.rb</code> file so that only URLs the end with <code>herokuapp.com</code> will be accepted into the database.</p></li><li>Urls must belong to a Student.</li>
+</ol>
+
+<p>Feel free modify these files in any way so long as your mods meet the required specs for this assignment.</p>
+
+<h2 id="pagination-optional">Pagination (optional)</h2>
+<p>Eventually you will have more URLs than you want to show on a single page. At that point you will have to think about pagination. Install the <code>will_paginate</code> gem (it worked in 2012). Read the documention to see how to use this plugin.</p>
+<h2 id="submit">SUBMIT</h2>
+<ol style="list-style-type: decimal">
+    <li><strong>VERY IMPORTANT:</strong> Create a Ruby CGI filed named <strong>lab8.cgi</strong> and upload it to your Hills <code>cs132a</code> directory. The script should display a link to your Heroku app. If you do not post a link to your Heroku app, I will not be able to grade your assignment and you will not get full credit. <em>I will not assume that you are using the same Heroku app you used in labs 7a and 7b</em>.
+    <li>Deploy your completed app to Heroku.</li>
+    <li>Using the Week 16: Assignment 8 Upload link, submit your entire app as a zip file named <strong>lab8.zip</strong>.</li>
+</ol>
+<h2 id="communication">Communication</h2>
+<p>This assignment is challenging. If you find yourself hitting a wall, ask your questions on the forums quickly so you can get answers and get back on track. And, if you see something in the assignment that doesn't work the way it should, please contact me so that I can fix it.</p>
+
+<p>I'm looking forward to see your improvements to the ruby-course app. :)</p>
+
+<p>Have fun.</p>
+<hr />
+</div>
+</div>
+</div>
+
+
+
+
+
