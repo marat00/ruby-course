@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'rails', '3.2.11'
 #gem 'rails', '4.0.1'
@@ -17,11 +18,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
-  gem 'zurb-foundation'
+  gem 'zurb-foundation', "= 3.2.5"
   gem 'dynamic_form'
   gem 'uglifier', '>= 1.0.3'
-  gem 'compass-rails'
-  gem 'zurb-foundation'
+  gem 'compass'
 end
 
 gem 'jquery-rails'
