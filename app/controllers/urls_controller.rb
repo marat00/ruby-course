@@ -73,12 +73,12 @@ class UrlsController < ApplicationController
   # DELETE /urls/1
   # DELETE /urls/1.json
   def destroy
-  #  @url = Url.find(params[:id])
-  #  @url.destroy
-#
-#    respond_to do |format|
-#      format.html { redirect_to urls_url }
-#      format.json { head :no_content }
-#  end
+    @url = Url.find(params[:id])
+    @url.destroy
+
+    respond_to do |format|
+      format.html { redirect_to urls_url }
+      format.json { head :no_content }
+    end
   end
 end

@@ -12,8 +12,7 @@
   <div class="four columns">
     <div class="panel radius" style="background-color:#ff8">
       <h4>Link to Your App</h4>
-      <p>Use this form to enter the URL for your Ruby Programming Heroku Rails Application. This form is
-      collecting URLs from both of my Ruby courses at <a href="http://hackingthevalley.com/ccsf/ruby">City College of San Francisco</a>. <%# <%#and <a href="http://hackingthevalley.com/csm/ruby">College of San Mateo%>.</a> %></p>
+      <p>Use this form to enter the URL for your Ruby Programming Heroku Rails Application. This form is collecting URLs from both of my Ruby courses at <a href="http://hackingthevalley.com/ccsf/ruby">City College of San Francisco</a>.</p>
         <p>Enter your USERID and your HEROKU app.</p>
       <p>Read the <a href="/welcome/assignment">assignment</a>.</p>
       </div>
@@ -25,7 +24,7 @@
         <%= f.label :COURSE %>
       </p>
       <p>
-        <%= f.select :course, options_for_select(['Choose your course',['CS 132A','cs132a'],['CIS 113','cis113']]) %>
+        <%= f.select :course, options_for_select(['Choose your course',['CS 132A','cs132a'],['CIS113','cis113']]) %>
       </p>
       <p>
         <%= f.label :USERID %>
@@ -48,12 +47,13 @@
   <div class="twelve columns panel callout">
     <h2>Your output will go here...</h2>
     <h5>
-        <p>
+      <p>
       When you are finished this assignment, your app will display links to class Heroku web sites here. 
       Go to the <a href="http://polar-journey-7101.herokuapp.com">example</a> to see how your
       page should behave. 
       </p>
-      <p>Register your own site into your Registry.</p>
+
+      <%= link_to 'Show Posts', [@student, @url] %>
     </h5>
   </div>
 </div>

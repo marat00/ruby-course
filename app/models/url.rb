@@ -1,6 +1,11 @@
 class Url < ActiveRecord::Base
+  require 'uri'
   attr_accessible :comment, :name, :student_id, :url
 
-  # Write code the shows a url belongs to a student
+  # shows a url belonging to a student
+  belongs_to :students
+  
   # Write code the validates urls have a domain name of herokuapp.com.
+  validates_format_of :url, with: /^(http:\/\/)+([a-zA-Z0-9]|[-])+(\.herokuapp.com)+$/i,
+                            :on => :create, uniqueness: true
 end

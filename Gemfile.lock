@@ -140,6 +140,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  compass
   compass-rails
   dynamic_form
   haml

@@ -8,5 +8,6 @@ class CreateUrls < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :urls, [:name, :url, :comment]
   end
 end

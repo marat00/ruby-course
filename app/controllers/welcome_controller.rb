@@ -13,6 +13,7 @@ class WelcomeController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @urls }
     end
+
   end
 
   def create
@@ -28,9 +29,24 @@ class WelcomeController < ApplicationController
         format.json { render json: @url, status: :created, location: @url }
       else
         # If the form doesn't validate we'll just redirect.
-        # We have to create a route in config/routes.rb for this to work
+        # We have to create a route in config/routes.rb for this to work  
         format.html { redirect_to  '/error'}
       end
     end
   end
+
+  # GET /urls
+  # GET /urls.json
+  def show
+    @students = Students.all
+
+    respond_to do |format|
+      format.html { redirect_to '/urls', notice: 'The list of urls:' }
+      format.json { render json: @url, status: :created, location: @url }
+    end
+  end
+
+  def destroy
+    @student.destroy
+    redirect_to urls_url
 end

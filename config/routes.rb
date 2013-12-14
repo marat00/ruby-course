@@ -1,22 +1,21 @@
 CloudRegistry::Application.routes.draw do
   get "welcome/register"
+  get "welcome/index"
 
   resources :urls
-
   resources :students
-
 
   resources :students do |url|
     resources :urls
   end
 
+  root :to => 'welcome#index'
   match '/urls' => 'urls#index'
   match '/error' => 'welcome#error'
   match '/welcome/create' =>'welcome#create'
   match '/welcome/:action' =>'welcome#action'
   match '/students' => 'students#view'
 
-  root :to => 'welcome#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
