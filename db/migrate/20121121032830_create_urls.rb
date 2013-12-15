@@ -8,6 +8,10 @@ class CreateUrls < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :urls, [:name, :url, :comment]
+    add_index :urls, [:name, :comment, :url], unique: true
+  end
+
+  def destroy
+    drop_table :urls
   end
 end

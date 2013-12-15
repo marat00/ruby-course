@@ -1,3 +1,5 @@
+<% redirect_to '/error' if @error %>
+
 <div class="row">
   <br>
 </div>
@@ -14,7 +16,7 @@
       <h4>Link to Your App</h4>
       <p>Use this form to enter the URL for your Ruby Programming Heroku Rails Application. This form is collecting URLs from both of my Ruby courses at <a href="http://hackingthevalley.com/ccsf/ruby">City College of San Francisco</a>.</p>
         <p>Enter your USERID and your HEROKU app.</p>
-      <p>Read the <a href="/welcome/assignment">assignment</a>.</p>
+     <p>Read the <a href="/welcome/assignment">assignment</a>.</p>
       </div>
     </div>
     <div class="eight columns" style="background-color:#f0f0f0;">
@@ -24,7 +26,8 @@
         <%= f.label :COURSE %>
       </p>
       <p>
-        <%= f.select :course, options_for_select(['Choose your course',['CS 132A','cs132a'],['CIS113','cis113']]) %>
+        <%= f.select :course, options_for_select(['Choose your course',['CS 132A - 73157','cs132a'],
+        ['CS 132A - 74686','cs132a']]) %>
       </p>
       <p>
         <%= f.label :USERID %>
@@ -43,17 +46,17 @@
     </div>
   </div>
 <div style="margin:1em 0; height:40px;clear:both;"><br></div>
+<div class="row links">
+    <div class="twelve columns">
+      <h2><tt>your output will go here...</tt></h2>
+<h5>
+  <hr>
+</h5>
 <div class="row">
-  <div class="twelve columns panel callout">
-    <h2>Your output will go here...</h2>
-    <h5>
-      <p>
-      When you are finished this assignment, your app will display links to class Heroku web sites here. 
-      Go to the <a href="http://polar-journey-7101.herokuapp.com">example</a> to see how your
-      page should behave. 
-      </p>
-
-      <%= link_to 'Show Posts', [@student, @url] %>
-    </h5>
-  </div>
+<div class="eight columns">
+<h3>previous visitors urls</h3>
+  <%= render 'welcome/table' %>
+</div>
+</div>
+</div>
 </div>

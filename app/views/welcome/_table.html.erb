@@ -1,0 +1,17 @@
+<div class="digg_pagination">
+<table>
+<th>Course</th>
+        <th>Name</th>
+        <th>Url</th>
+      <% @students.each do |s| %>
+        <% s.urls.each do |u| %>
+          <tr>
+            <td><%= s.course %></td>
+            <td><%= s.name %></td>
+            <td><a href="<%= u.url %>" title="<%= s.name %>"><%= u.url %></a></td>
+          </tr><br />
+        <% end %>
+      <% end %>
+<%= will_paginate @students %>
+</table>
+</div>

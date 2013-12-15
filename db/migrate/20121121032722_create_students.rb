@@ -7,4 +7,8 @@ class CreateStudents < ActiveRecord::Migration
       t.timestamps
     end
   end
+
+  def destroy
+  	drop_table :students
+  end
 end

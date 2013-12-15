@@ -7,5 +7,6 @@ class Url < ActiveRecord::Base
   
   # Write code the validates urls have a domain name of herokuapp.com.
   validates_format_of :url, with: /^(http:\/\/)+([a-zA-Z0-9]|[-])+(\.herokuapp.com)+$/i,
-                            :on => :create, uniqueness: true
+                            :on => :create
+  validates_uniqueness_of :url
 end

@@ -30,6 +30,8 @@ GEM
       multi_json (~> 1.0)
     ansi (1.4.3)
     arel (3.0.3)
+    bootstrap-will_paginate (0.0.6)
+      will_paginate
     builder (3.0.4)
     chunky_png (1.2.9)
     coffee-rails (3.2.2)
@@ -129,6 +131,7 @@ GEM
     uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    will_paginate (3.0.3)
     zurb-foundation (3.2.5)
       compass (>= 0.12.2)
       modular-scale (= 1.0.6)
@@ -139,6 +142,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bootstrap-will_paginate (= 0.0.6)
   coffee-rails (~> 3.2.1)
   compass
   compass-rails
@@ -153,4 +157,5 @@ DEPENDENCIES
   therubyracer (>= 0.11.1)
   turn
   uglifier (>= 1.0.3)
+  will_paginate (= 3.0.3)
   zurb-foundation (= 3.2.5)

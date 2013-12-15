@@ -13,5 +13,5 @@ class Student < ActiveRecord::Base
   validates :name, :inclusion => { :in => VALID_STUDENTS }
 
   # validate that :course is correct
-  validates :course, presence: true
+  validates_format_of :course, :with => /cs132a/, :on => :create
 end

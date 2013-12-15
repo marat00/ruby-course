@@ -6,16 +6,37 @@ body {
   line-height: 1.5;
 }
 
-p, ol, ul, td {
+p, ol, ul, td{
   font-family: "Helvetica Neue",Helvetica,arial, sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
+  margin: 0em 0;
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
+}
+
+th {
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center
+}
+
+.panel {
+  a { 
+    color: #2BA6CB;
+    &:visited {
+      color: purple;
+    }
+    &:hover{
+      color: #000;
+    }
+  }
 }
 
 a {
