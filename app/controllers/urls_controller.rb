@@ -2,8 +2,8 @@ class UrlsController < ApplicationController
   # GET /urls
   # GET /urls.json
   def index
-    @urls = Url.paginate(:page => params[:page])
-    @students = Student.paginate(:page => params[:page])
+    @urls = Url.paginate(:page => params[:page], :per_page => 10)
+    @students = Student.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb

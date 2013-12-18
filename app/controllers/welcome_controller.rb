@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   def index
     # We will be creating a new student object to use with Register URL form
     @student = Student.new 
-    @students = Student.paginate(:page => params[:page])
+    @students = Student.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb

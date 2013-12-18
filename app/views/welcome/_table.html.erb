@@ -1,18 +1,25 @@
-<div class="digg_pagination">
-<table><%= will_paginate @students %>
-<tr>
-  <th>Course</th>
-  <th>Name</th>
-  <th>Url</th>
+<table style="position:relative; top:-150px">
+<p>The following URLs have been validated, using the following
+criteria: <br>
+ &#9830;The course section must be selected. <br>
+ &#9830;The name must be selected and be on the list of valid students.<br>
+ &#9830;The URL must be unique.<br>
+</p><br>
+<%= will_paginate @students %>
+<tr>  
+   <th>Course</th>
+   <th>Name</th>
+   <th>Url</th>
 </tr>
       <% @students.each do |s| %>
-        <% s.urls.each do |u| %>
+        <% s.urls.each do |u|s %>
+	  <% unless u.nil? %>
           <tr>
             <td><%= s.course %></td>
             <td><%= s.name %></td>
             <td><a href="<%= u.url %>" title="<%= s.name %>"><%= u.url %></a></td>
           </tr><br />
+	  <% end %>
         <% end %>
       <% end %>
 </table>
-</div>

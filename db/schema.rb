@@ -29,4 +29,6 @@ ActiveRecord::Schema.define(:version => 20121121032830) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "urls", ["name", "comment", "url"], :name => "index_urls_on_name_and_comment_and_url", :unique => true
+
 end
