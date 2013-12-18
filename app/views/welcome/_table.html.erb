@@ -1,8 +1,10 @@
 <div class="digg_pagination">
-<table>
-<th>Course</th>
-        <th>Name</th>
-        <th>Url</th>
+<table><%= will_paginate @students %>
+<tr>
+  <th>Course</th>
+  <th>Name</th>
+  <th>Url</th>
+</tr>
       <% @students.each do |s| %>
         <% s.urls.each do |u| %>
           <tr>
@@ -12,6 +14,5 @@
           </tr><br />
         <% end %>
       <% end %>
-<%= will_paginate @students %>
 </table>
 </div>
