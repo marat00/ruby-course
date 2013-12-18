@@ -24,7 +24,7 @@ group :assets do
   gem 'dynamic_form'
   gem 'uglifier', '>= 1.0.3'
   gem 'compass'
-  gem 'therubyracer', '0.11.1'
+  gem 'therubyracer', '0.11.3'
 end
 
 gem 'jquery-rails'
